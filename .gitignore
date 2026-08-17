@@ -1,0 +1,42 @@
+# SAP export / çalışma verisi — asla commit edilmez
+*.xlsx
+*.xls
+*.csv
+*.pbit
+!ayarlar.ornek.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# İşletim sistemi / editör
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# Motor çıktıları
+kalite_kontrol_sonuc.xlsx
+powerbi_bulgular.xlsx
+powerbi_bulgular_duzeltilmis.xlsx
+kategori_analizi.xlsx
+powerbi_veri_modeli.xlsx
+calistirma_gecmisi.xlsx
+veri_kalite_dashboard.html
+powerbi_rehber.md
+powerbi_tema.json
+powerbi_tarayici.xlsx
+malzeme_veri_kalitesi.pbit
+
+# Logo / kurumsal varlık (telif)
+*logo*
+*.svg
+*.png
+*.jpg
+*.jpeg
+!docs/**
