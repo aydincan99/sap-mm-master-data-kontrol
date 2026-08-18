@@ -351,7 +351,7 @@ TERS_KONTROL_ALANLARI = ["Ek Alan"]
 
 # Kural 3: yasaklı kelimeler (tek başına kelime olarak aranır)
 YASAKLI_KELIMELER = ["NEW", "YENİ", "YENI", "6", "7", "2026", "2027"]
-# Bu sayılar tanımın ORTASINDA geçerse hata değildir (örn. "ARKO CREAM 6 150X4X18 ML"
+# Bu sayılar tanımın ORTASINDA geçerse hata değildir (örn. "MARKA X CREAM 6 150X4X18 ML"
 # ürün varyantıdır); yalnızca tanımın SONUNDA yer alırsa yakalanır.
 YASAKLI_SADECE_SONDA = ["6", "7"]
 
@@ -713,7 +713,7 @@ def _kural2_kod_haritalari():
 
 def _tanim_sonu_kodlari(tanim_norm: str, tek: set, cift: set) -> list:
     """Tanımın SONUNDAN geriye doğru art arda gelen kodları toplar.
-    Örn. 'ARKO SOAP TR LF' -> ['LF', 'TR']"""
+    Örn. 'MARKA X SOAP TR LF' -> ['LF', 'TR']"""
     parcalar = re.split(r"[\s\-_/.]+", tanim_norm)
     parcalar = [p for p in parcalar if p]
     bulunan = []
@@ -5313,7 +5313,7 @@ KURAL_ACIKLAMA = {
            "(…200MLx24RU) ve birden çok kod aynı satırda ayrı ayrı denetlenir."),
     "K3": ("Yasaklı kelimeler — NEW, YENİ, YENI ile 2026 ve 2027 tanımın her "
            "yerinde yasaktır. 6 ve 7 ise yalnızca tanımın SONUNDA yasaklıdır; "
-           "ortada geçen 6 ürün varyantıdır (ARKO CREAM 6 150X4X18 ML temizdir) "
+           "ortada geçen 6 ürün varyantıdır (MARKA X CREAM 6 150X4X18 ML temizdir) "
            "ve KFR*6 gibi çarpanlar hata sayılmaz."),
     "K4": ("Çokluk ↔ MARM sayacı — Tanımın sonundaki çokluk (…125G*8X12 → 12), "
            "MARM tablosunda o malzeme koduna ait TÜM alternatif ölçü birimi "
