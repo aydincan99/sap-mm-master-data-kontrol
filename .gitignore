@@ -4,6 +4,7 @@
 *.csv
 *.pbit
 !ayarlar.ornek.xlsx
+!examples/*.xlsx
 
 # Python
 __pycache__/

@@ -141,6 +141,32 @@ Motor, script ile **aynı klasördeki** dosyaları arar. Dosya adları kodun üs
 
 Google Colab’da veri yoksa boş panel üretilir; yükleme tarayıcıdan yapılır.
 
+### Örnek veri (demoyu yeniden üretmek için)
+
+[`examples/`](examples/) klasöründe **sentetik** bir test seti vardır. Canlı SAP export’u değildir; K1–K6 bulgularını göstermek için üretilmiştir.
+
+| Dosya | Satır | İçerik |
+|---|---|---|
+| [`examples/urun_kodlari.xlsx`](examples/urun_kodlari.xlsx) | 25 | Ürün kodları (tür 6/7) |
+| [`examples/ust_kodlar.xlsx`](examples/ust_kodlar.xlsx) | 8 | Üst kodlar (RC…, tür 15) |
+| [`examples/marm.xlsx`](examples/marm.xlsx) | 66 | Alternatif ölçü birimi sayaçları |
+
+Motor dosyaları çalışma dizininde arar. Örnek seti kopyalayıp çalıştırın:
+
+```bash
+copy examples\urun_kodlari.xlsx urun_kodlari.xlsx
+copy examples\ust_kodlar.xlsx ust_kodlar.xlsx
+copy examples\marm.xlsx marm.xlsx
+python "malzeme kalite kontrol (1).py"
+```
+
+macOS / Linux:
+
+```bash
+cp examples/urun_kodlari.xlsx examples/ust_kodlar.xlsx examples/marm.xlsx .
+python "malzeme kalite kontrol (1).py"
+```
+
 ---
 
 ## Çıktılar
