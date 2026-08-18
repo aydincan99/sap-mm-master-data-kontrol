@@ -2001,55 +2001,17 @@ def dashboard_uret(ozet, durum, k2, pbi, basit, dosya, istisna_n=0,
                 .replace('"', "&quot;").replace("\n", " "))
 
     # ---------------------------------------------------------------
-    # KURUMSAL KİMLİK — Evyap logosu ve satır içi SVG ikon seti
-    # (yalnızca sunum katmanı; hiçbir hesaplamayı etkilemez)
+    # SUNUM KİLİDİ — deneme / test sürümü (hesaplamayı etkilemez)
     # ---------------------------------------------------------------
-    import base64 as _b64, os as _os
-
-    def _evyap_logo_goml():
-        """evyap_logo.svg / evyap_logo.png dosyasını panele gömer.
-
-        Logo bulunamazsa yalnızca yazı tabanlı bir marka kilidi kullanılır;
-        logo hiçbir koşulda yeniden çizilmez, gerilmez veya renklendirilmez.
-        """
-        adaylar = []
-        try:
-            _kok = _os.path.dirname(_os.path.abspath(__file__))
-        except Exception:
-            _kok = _os.getcwd()
-        for _d in (_os.getcwd(), _kok, _os.path.dirname(_os.path.abspath(dosya)) or "."):
-            for _ad in ("evyap_logo.svg", "evyap_logo.png",
-                        "evyap_logo.jpg", "evyap_logo.jpeg"):
-                adaylar.append(_os.path.join(_d, _ad))
-        for _y in adaylar:
-            try:
-                if not _os.path.isfile(_y):
-                    continue
-                with open(_y, "rb") as _f:
-                    _ham = _f.read()
-                _uzanti = _os.path.splitext(_y)[1].lower()
-                _tip = {".svg": "image/svg+xml", ".png": "image/png",
-                        ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}[_uzanti]
-                _b64s = _b64.b64encode(_ham).decode("ascii")
-                return (f'<img src="data:{_tip};base64,{_b64s}" alt="Evyap" '
-                        f'decoding="async">')
-            except Exception:
-                continue
-        return ""
-
-    _LOGO = _evyap_logo_goml()
-    _LOGO_VAR = bool(_LOGO)
-    _LOGO_YEDEK = '<span class="kilit-yedek">EVYAP</span>'
+    _LOGO_YEDEK = '<span class="kilit-yedek">DENEME</span>'
 
     def marka_kilidi(koyu=False, alt=True):
-        """Evyap logosu + ürün adı + birim bilgisinden oluşan kompakt kilit."""
-        ic = _LOGO if _LOGO_VAR else _LOGO_YEDEK
-        # Koyu zeminde beyaz logo varyantı yoksa logo hafif bir marka plakasına oturur.
-        sinif = "kilit-logo kilit-plaka" if (koyu and _LOGO_VAR) else "kilit-logo"
+        """Sol üst kilit: deneme etiketi + ürün adı."""
+        sinif = "kilit-logo kilit-plaka" if koyu else "kilit-logo"
         metin = ('<span class="kilit-metin"><b>Malzeme Veri Kalitesi</b>'
-                 '<small>Bilgi Teknolojileri · SAP MM</small></span>') if alt else \
+                 '<small>Test sürümü · SAP MM</small></span>') if alt else \
                 ('<span class="kilit-metin"><b>Malzeme Veri Kalitesi</b></span>')
-        return (f'<div class="kilit"><span class="{sinif}">{ic}</span>'
+        return (f'<div class="kilit"><span class="{sinif}">{_LOGO_YEDEK}</span>'
                 f'<span class="kilit-ayrac"></span>{metin}</div>')
 
     _IKON = {
@@ -2375,8 +2337,8 @@ def dashboard_uret(ozet, durum, k2, pbi, basit, dosya, istisna_n=0,
 
     stil = """
 /* =====================================================================
-   EVYAP · MALZEME VERİ KALİTESİ — KURUMSAL TASARIM SİSTEMİ
-   Bilgi Teknolojileri · SAP MM
+   MALZEME VERİ KALİTESİ — DENEME / TEST SÜRÜMÜ
+   SAP MM
    ===================================================================== */
 :root{
 /* marka */
@@ -4901,12 +4863,12 @@ Silinmiş kayıtlar hariç</div></div>
 
     html = f"""<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Evyap · Malzeme Veri Kalitesi — Kontrol Paneli</title>
+<title>Malzeme Veri Kalitesi — Deneme / Test Sürümü</title>
 <style>{stil}{khap_stil}</style></head><body>
 
 <div class="baski-ust">{marka_kilidi()}
 <div class="baski-bilgi"><b>Malzeme Veri Kalitesi Raporu</b><br>
-SAP MM · Malzeme Master · Bilgi Teknolojileri<br>Çalıştırma tarihi: {tarih}</div></div>
+SAP MM · Malzeme Master · Deneme / Test sürümü<br>Çalıştırma tarihi: {tarih}</div></div>
 
 <div id="giris">
 <div class="g-arka">
